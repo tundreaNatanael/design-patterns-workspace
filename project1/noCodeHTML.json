@@ -1,0 +1,88 @@
+{
+  "type": "div",
+  "backgroundColor": "#f0f0f0",
+  "padding": 20,
+  "margins": 10,
+  "children": [
+    {
+      "type": "div",
+      "backgroundColor": "#ffffff",
+      "padding": 30,
+      "margins": 0,
+      "children": [
+        {
+          "type": "h1",
+          "text": "Welcome to Nathan's website",
+          "color": "#333333",
+          "bold": true,
+          "padding": 10,
+          "margins": 0
+        },
+        {
+          "type": "p",
+          "text": "This is a sample paragraph demonstrating the HTML generation system.",
+          "color": "#666666",
+          "bold": false,
+          "padding": 10,
+          "margins": 5
+        },
+        {
+          "type": "div",
+          "backgroundColor": "#e8f4f8",
+          "padding": 15,
+          "margins": 10,
+          "children": [
+            {
+              "type": "h1",
+              "text": "About This Project",
+              "color": "#0066cc",
+              "bold": true,
+              "padding": 5,
+              "margins": 0
+            },
+            {
+              "type": "p",
+              "text": "This page was generated from a JSON configuration file using Java classes and OOP.",
+              "color": "#333333",
+              "bold": false,
+              "padding": 5,
+              "margins": 5
+            }
+          ]
+        },
+        {
+          "type": "div",
+          "backgroundColor": "#fff9e6",
+          "padding": 15,
+          "margins": 10,
+          "children": [
+            {
+              "type": "h1",
+              "text": "Features",
+              "color": "#cc6600",
+              "bold": true,
+              "padding": 5,
+              "margins": 0
+            },
+            {
+              "type": "p",
+              "text": "The system supports divs, styled text elements, and custom properties.",
+              "color": "#333333",
+              "bold": false,
+              "padding": 5,
+              "margins": 5
+            },
+            {
+              "type": "p",
+              "text": "You can easily modify the JSON file to create different page layouts!",
+              "color": "#666666",
+              "bold": true,
+              "padding": 5,
+              "margins": 5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
