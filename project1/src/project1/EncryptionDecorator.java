@@ -6,7 +6,7 @@ import java.util.Base64;
 
 public class EncryptionDecorator extends BaseDataSourceDecorator{
     // Simple encryption key (16 bytes for AES-128)
-    private static final String SECRET_KEY = "MySecretKey12345";
+    private static final String SECRET_KEY = "Nathan1234";
 
     public EncryptionDecorator(DataSource wrappee)
     {
