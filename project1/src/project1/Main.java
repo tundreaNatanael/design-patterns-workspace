@@ -10,6 +10,11 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		// Template method is a design patter that declares an abstract class with a
+		// template of operations that remains unmodified by children. The children can
+		// only override the specific functionalities (methods), but cannot change the
+		// order or execution of those methods in the template by the abstract class.
+
 		System.out.println("Cooking pasta carbonara");
 		Pasta carbonaraPasta = new CarbonaraPasta();
 		carbonaraPasta.preparePasta();
