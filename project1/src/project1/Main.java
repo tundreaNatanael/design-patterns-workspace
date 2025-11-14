@@ -1,14 +1,17 @@
 package project1;
 
-import socialMedia.SocialMediaPostingFacade;
+import socialMedia.SocialMediaFacade;
 
 public class Main {
 
+	final static String MESSAGE = "Check me out";
+
 	public static void main(String[] args) {
-		SocialMediaPostingFacade s = new SocialMediaPostingFacade();
-		s.postOnFacebook("Check me out");
-		s.postOnInstagram("Check me out");
-		s.postOnTikTok("Check me out");
+		SocialMediaFacade instance = new SocialMediaFacade();
+		System.out.println("\nPosting on media based social medias");
+		instance.postOnMediaBased(MESSAGE);
+		System.out.println("\nPosting on text based social medias");
+		instance.postOnTextBased(MESSAGE);
 	}
 
 }

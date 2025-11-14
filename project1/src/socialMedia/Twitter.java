@@ -1,14 +1,15 @@
 package socialMedia;
 
-class Facebook extends SocialMedia {
+class Twitter extends SocialMedia {
 
-	public Facebook() {
+	public Twitter() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	void post(String message) {
-		System.out.println("Postin on FB:	" + message);
+		System.out.println("Postin on Twitter:	" + message);
+
 	}
 
 }

@@ -1,14 +1,14 @@
 package socialMedia;
 
-class Facebook extends SocialMedia {
+class WhatsApp extends SocialMedia {
 
-	public Facebook() {
+	public WhatsApp() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	void post(String message) {
-		System.out.println("Postin on FB:	" + message);
+		System.out.println("Postin on WhatsApp:	" + message);
 	}
 
 }
