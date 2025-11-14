@@ -1,18 +1,30 @@
 package project1;
 
+import italianPasta.AmatricianaPasta;
+import italianPasta.CarbonaraPasta;
+import italianPasta.MushroomPasta;
+import italianPasta.Pasta;
+import italianPasta.ZozzonaPasta;
+
 public class Main {
 
 	public static void main(String[] args) {
-		ClassicArtist beethoven = new ClassicArtist();
-		beethoven.singSong();
-		
-		RockArtist queen = new RockArtist();
-		queen.singSong();
-		
-		GeneralArtist generic = new GeneralArtist();
-		generic.singSong("classic");
-		generic.singSong("rock");
+
+		System.out.println("Cooking pasta carbonara");
+		Pasta carbonaraPasta = new CarbonaraPasta();
+		carbonaraPasta.preparePasta();
+
+		System.out.println("\nCooking pasta amatriciana");
+		Pasta amatricianaPasta = new AmatricianaPasta();
+		amatricianaPasta.preparePasta();
+
+		System.out.println("\nCooking pasta al zozzona");
+		Pasta zozzonaPasta = new ZozzonaPasta();
+		zozzonaPasta.preparePasta();
+
+		System.out.println("\nCooking pasta with mushrooms");
+		Pasta mushroomPasta = new MushroomPasta();
+		mushroomPasta.preparePasta();
 	}
-	
 
 }
