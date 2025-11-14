@@ -1,18 +1,14 @@
 package project1;
 
+import socialMedia.SocialMediaPostingFacade;
+
 public class Main {
 
 	public static void main(String[] args) {
-		ClassicArtist beethoven = new ClassicArtist();
-		beethoven.singSong();
-		
-		RockArtist queen = new RockArtist();
-		queen.singSong();
-		
-		GeneralArtist generic = new GeneralArtist();
-		generic.singSong("classic");
-		generic.singSong("rock");
+		SocialMediaPostingFacade s = new SocialMediaPostingFacade();
+		s.postOnFacebook("Check me out");
+		s.postOnInstagram("Check me out");
+		s.postOnTikTok("Check me out");
 	}
-	
 
 }
