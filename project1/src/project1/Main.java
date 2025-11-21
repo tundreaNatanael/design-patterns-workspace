@@ -14,9 +14,10 @@ public class Main {
 
 		IShippingCostCalculator fanCurier = new FanCurierCostCalculator();
 		IShippingCostCalculator sameDay = new SameDayCostCalculator();
+		IShippingCostCalculator glovo = new GlovoCostCalculator();
 
 		StoreCheckout checkout = new StoreCheckout(order);
-		checkout.setShippingCalculator(fanCurier);
+		checkout.setShippingCalculator(glovo);
 
 		System.out.println(checkout.getTotalCost());
 	}
