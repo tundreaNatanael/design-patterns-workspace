@@ -3,23 +3,18 @@ package project1;
 public class Main {
 
 	public static void main(String[] args) {
-		Product product1 = new Product("Laptop", 2, 2400);
-		Product product2 = new Product("IPhone 15", 0.500, 6000);
-		Product product3 = new Product("frigider", 5, 1200);
+		MovingType volvo = new Car();
+		MovingType cube = new Bike();
+		MovingType person1 = new Person();
 
-		Order order = new Order();
-		order.addProduct(product1);
-		order.addProduct(product2);
-		order.addProduct(product3);
+		Route route = new Route(400);
+		route.setMovingType(volvo);
 
-		IShippingCostCalculator fanCurier = new FanCurierCostCalculator();
-		IShippingCostCalculator sameDay = new SameDayCostCalculator();
-		IShippingCostCalculator glovo = new GlovoCostCalculator();
+		TimeCalculator carcalc = new CarCalculator(route);
+//		TimeCalculator bikecalc = new BikeCalculator(route);
+//		TimeCalculator perscalc = new PersonCalculator(route);
 
-		StoreCheckout checkout = new StoreCheckout(order);
-		checkout.setShippingCalculator(glovo);
-
-		System.out.println(checkout.getTotalCost());
+		System.out.println(carcalc.getRouteMinutes(route));
 	}
 
 }
