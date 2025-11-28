@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Server {
 	private List<Client> clients;
-
 	private List<Message> pendingMessages;
 
 	public Server() {
