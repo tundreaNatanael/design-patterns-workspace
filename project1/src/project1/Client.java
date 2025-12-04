@@ -2,7 +2,7 @@ package project1;
 
 public class Client {
 	private String name;
-	private int location; // 1-100 km
+	private int location;
 
 	public Client(String name, int location) {
 		this.name = name;

@@ -2,7 +2,7 @@ package project1;
 
 public abstract class Vehicle {
 	protected String id;
-	protected int distanceFromClient; // 1-100 km
+	protected int distanceFromClient;
 	protected boolean inTrip;
 
 	public Vehicle(String id, int distanceFromClient) {

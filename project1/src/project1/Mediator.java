@@ -14,31 +14,28 @@ public class Mediator {
 
 	public void registerVehicle(Vehicle vehicle) {
 		vehicles.add(vehicle);
-		System.out.println("Registered: " + vehicle.getVehicleInfo());
+		System.out.println("added: " + vehicle.getVehicleInfo());
 	}
 
 	public List<Vehicle> findAvailableVehicles(Client client, int tripDistance) {
-		System.out.println("\n=== Finding vehicles for " + client.getName() + " ===");
-		System.out.println("Client location: " + client.getLocation() + " km");
-		System.out.println("Trip distance: " + tripDistance + " km");
+		System.out.println("\n=== searchin rides for " + client.getName() + " ===");
+		System.out.println("ur at: " + client.getLocation() + " km");
+		System.out.println("trip: " + tripDistance + " km");
 
-		// Calculate distances from client and filter available vehicles
-		List<Vehicle> availableVehicles = vehicles.stream().filter(v -> !v.isInTrip()) // Not in another trip
+		List<Vehicle> availableVehicles = vehicles.stream().filter(v -> !v.isInTrip())
 				.peek(v -> {
-					// Update distance from client based on client's location
 					int distance = Math.abs(v.getDistanceFromClient() - client.getLocation());
 					v.setDistanceFromClient(distance);
-				}).filter(v -> v.canCompleteTrip(tripDistance)) // Can complete at least 50% for scooters
-				.sorted(Comparator.comparingInt(Vehicle::getDistanceFromClient)) // Sort by distance
-				.limit(3) // Get top 3 closest
+				}).filter(v -> v.canCompleteTrip(tripDistance))
+				.sorted(Comparator.comparingInt(Vehicle::getDistanceFromClient))
+				.limit(3)
 				.collect(Collectors.toList());
 
-		System.out.println("\nFound " + availableVehicles.size() + " available options:");
+		System.out.println("\nfound " + availableVehicles.size() + " option:");
 		for (int i = 0; i < availableVehicles.size(); i++) {
 			Vehicle v = availableVehicles.get(i);
 			System.out.println((i + 1) + ". " + v.getVehicleInfo());
 
-			// Show trip estimate for scooters
 			if (v instanceof Scooter) {
 				Scooter scooter = (Scooter) v;
 				System.out.println("   → " + scooter.getTripEstimate(tripDistance));
@@ -50,18 +47,18 @@ public class Mediator {
 
 	public void bookVehicle(Vehicle vehicle) {
 		vehicle.setInTrip(true);
-		System.out.println("\n✓ Booked: " + vehicle.getVehicleInfo());
+		System.out.println("\nbooked " + vehicle.getVehicleInfo());
 	}
 
 	public void releaseVehicle(Vehicle vehicle) {
 		vehicle.setInTrip(false);
-		System.out.println("✓ Released: " + vehicle.getVehicleInfo());
+		System.out.println("trip done: " + vehicle.getVehicleInfo());
 	}
 
 	public void displayAllVehicles() {
-		System.out.println("\n=== All Vehicles in System ===");
+		System.out.println("\n=== all vehicles ===");
 		for (Vehicle v : vehicles) {
-			String status = v.isInTrip() ? "[IN TRIP]" : "[AVAILABLE]";
+			String status = v.isInTrip() ? "[busy]" : "[free]";
 			System.out.println(status + " " + v.getVehicleInfo());
 		}
 	}

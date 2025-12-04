@@ -13,12 +13,11 @@ public class Car extends Vehicle {
 
 	@Override
 	public boolean canCompleteTrip(int tripDistance) {
-		// Cars can always complete any trip (no range limitation)
 		return true;
 	}
 
 	@Override
 	public String getVehicleInfo() {
-		return String.format("Car %s - Distance: %d km", id, distanceFromClient);
+		return String.format("Car %s - %d km away", id, distanceFromClient);
 	}
 }
