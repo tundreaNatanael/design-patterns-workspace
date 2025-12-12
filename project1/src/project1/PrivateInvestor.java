@@ -9,7 +9,8 @@ public class PrivateInvestor implements IInvestor {
 	}
 
 	@Override
-	public void update() {
-		System.out.println(_investorName + " has been notified that the stock price has changed");
+	public void update(Stock newStock) {
+		System.out.println(_investorName + " has been notified that the stock " + newStock.getName()
+				+ " price has changed: NEW " + newStock.getCurrency() + newStock.getPrice());
 	}
 }

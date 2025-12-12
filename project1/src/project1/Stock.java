@@ -28,32 +28,32 @@ public abstract class Stock implements StockSubscriber {
 	}
 
 	private void sendNotification() {
-		_investors.forEach(IInvestor::update);
+		_investors.forEach(investor -> investor.update(this));
 	}
 
-	public String get_name() {
+	public String getName() {
 		return _name;
 	}
 
-	public void set_name(String _name) {
+	public void setName(String _name) {
 		this._name = _name;
 	}
 
-	public double get_price() {
+	public double getPrice() {
 		return _price;
 	}
 
-	public void set_price(double _price) {
+	public void setPrice(double _price) {
 		this._price = _price;
 		// each time the price changes, it will sendNotification its observers
 		sendNotification();
 	}
 
-	public String get_currency() {
+	public String getCurrency() {
 		return _currency;
 	}
 
-	public void set_currency(String _currency) {
+	public void setCurrency(String _currency) {
 		this._currency = _currency;
 		// each time the currency changes, it will sendNotification its observers
 		sendNotification();

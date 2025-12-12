@@ -8,15 +8,16 @@ public class Main {
 		PrivateInvestor johnDoeInvestor = new PrivateInvestor("John Doe", amzStock);
 		PublicInvestor vooInvestor = new PublicInvestor("VOO", amzStock);
 
-		amzStock.set_price(1001);
+		amzStock.setPrice(1001);
 		amzStock.unsubscribe(johnDoeInvestor);
-		amzStock.set_price(1000);
+		amzStock.setPrice(1000);
 		amzStock.unsubscribe(vooInvestor);
 
 		amzStock.subscribe(johnDoeInvestor);
 
-		amzStock.set_price(1002);
+		amzStock.setPrice(1002);
 
+		// TODO
 		// 1. Identify wrong dependencie s
 		// 2. Improve code
 		// 3. Think what other pattern(s) could be used to make code as SOLID as
