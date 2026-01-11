@@ -1,7 +1,10 @@
+// PATTERN: observer
 package project1;
 
 public class PrivateInvestor implements IInvestor {
 	private String _investorName;
+	private double _lastPrice;
+	private boolean _hasLast;
 
 	public PrivateInvestor(String investorName, StockSubscriber stock) {
 		_investorName = investorName;
@@ -10,7 +13,11 @@ public class PrivateInvestor implements IInvestor {
 
 	@Override
 	public void update(Stock newStock) {
-		System.out.println(_investorName + " has been notified that the stock " + newStock.getName()
-				+ " price has changed: NEW " + newStock.getCurrency() + newStock.getPrice());
+		String dir = "up";
+		if (_hasLast && newStock.getPrice() < _lastPrice)
+			dir = "down";
+		_lastPrice = newStock.getPrice();
+		_hasLast = true;
+		System.out.println(_investorName + " watch " + newStock.getTicker() + " " + dir);
 	}
 }

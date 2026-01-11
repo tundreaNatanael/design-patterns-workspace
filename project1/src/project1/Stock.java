@@ -1,3 +1,4 @@
+// PATTERN: observer
 package project1;
 
 import java.util.ArrayList;
@@ -7,12 +8,18 @@ public abstract class Stock implements StockSubscriber {
 	private String _currency;
 	private double _price;
 	private String _name;
+	private String _ticker;
+	private int _qty;
+	private boolean _isCrypto;
 	private List<IInvestor> _investors = new ArrayList<>();
 
-	protected Stock(String name, String currency, double price) {
+	protected Stock(String name, String ticker, String currency, double price, int qty, boolean isCrypto) {
 		_name = name;
+		_ticker = ticker;
 		_currency = currency;
 		_price = price;
+		_qty = qty;
+		_isCrypto = isCrypto;
 	}
 
 	public void subscribe(IInvestor investor) {
@@ -39,13 +46,20 @@ public abstract class Stock implements StockSubscriber {
 		this._name = _name;
 	}
 
+	public String getTicker() {
+		return _ticker;
+	}
+
+	public void setTicker(String _ticker) {
+		this._ticker = _ticker;
+	}
+
 	public double getPrice() {
 		return _price;
 	}
 
 	public void setPrice(double _price) {
 		this._price = _price;
-		// each time the price changes, it will sendNotification its observers
 		sendNotification();
 	}
 
@@ -55,11 +69,22 @@ public abstract class Stock implements StockSubscriber {
 
 	public void setCurrency(String _currency) {
 		this._currency = _currency;
-		// each time the currency changes, it will sendNotification its observers
 		sendNotification();
 	}
 
+	public int getQty() {
+		return _qty;
+	}
+
+	public void setQty(int _qty) {
+		this._qty = _qty;
+	}
+
+	public boolean isCrypto() {
+		return _isCrypto;
+	}
+
 	public String getStockInfo() {
-		return _name + " " + _price + _currency;
+		return _ticker + " " + _price + _currency;
 	}
 }

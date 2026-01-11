@@ -1,0 +1,11 @@
+// PATTERN: facade
+- singleton -> project1/core/Store.java -> single market list
+- factory method -> project1/core/Maker.java, project1/AmazonStock.java -> build items by input
+- composite -> project1/model/Group.java, project1/model/Holding.java -> portfolio value via shared node
+- decorator -> project1/trade/BaseCost.java, project1/trade/PenaltyWrap.java -> add 5% fee rule
+- command -> project1/trade/BuyAct.java, project1/trade/SellAct.java -> wrap buy/sell actions
+- facade -> project1/core/Gate.java -> one surface for Main
+- template method -> project1/trade/Steps.java -> shared trade flow
+- strategy -> project1/trade/PlanDay.java, project1/trade/PlanLong.java, project1/trade/PlanAuto.java -> switch plans
+- mediator -> project1/core/Hub.java -> coordinates store, trades, watch
+- observer -> project1/Stock.java, project1/notify/WatchCenter.java -> price change notifications
