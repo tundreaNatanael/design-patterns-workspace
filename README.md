@@ -2,7 +2,7 @@
 
 This repository is a small Java trading app project made for my Design Patterns homework class. It shows several classic design patterns in a simple, non-interactive app, with the flow hardcoded in `Main.java` here.
 
-Prompt: [project2-trading-platform-app-prompt.txt](project2-trading-platform-app-prompt.txt)
+Codex prompt: [project2-trading-platform-app-prompt.txt](project2-trading-platform-app-prompt.txt)
 
 **Structure**
 - `project1/src` — Java source files
