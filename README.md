@@ -9,5 +9,5 @@ Prompt: [project2-trading-platform-app-prompt.txt](project2-trading-platform-app
 - `project1/src/PATTERNS.md` — pattern mapping and short rationale
 - `project2-trading-platform-app-structure.txt` — high-level structure summary
 
-**Run**
+**Run Instructions**
 Run `Main.java` from the `project1/` folder.
