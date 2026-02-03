@@ -1,0 +1,80 @@
+// PATTERN: facade
+  - singleton: `core/Store` keeps one shared market list for all users.
+  - factory method: `core/Maker.make` creates stock/crypto items from simple
+  inputs.
+  - composite: `model/Group` and `model/Holding` share `value()` for totals.
+  - decorator: `trade/PenaltyWrap` adds the 5% day-hold fee on top of
+  `BaseCost`.
+  - command: `trade/BuyAct` and `trade/SellAct` run trades as objects.
+  - facade: `core/Hub` exposes register/login/search/buy/sell/watch/tick.
+  - template method: `trade/Steps.execute` fixes the trade flow and uses hooks.
+  - strategy: `trade/PlanDay`, `trade/PlanLong`, `trade/PlanAuto` switch
+  behavior.
+
+ Project Structure
+
+  - module-info.java — module declaration
+  - PATTERNS.md — pattern mapping and rationale
+  - project1/
+      - Main.java — hardcoded demo flow (creates market, users, plans, trades,
+        ticks)
+      - Stock.java — base market item + old observer list
+      - AmazonStock.java — sample stock item
+      - BasicItem.java — generic stock/crypto item
+      - StockSubscriber.java — old observer subscribe/unsubscribe
+      - IInvestor.java — old observer update interface
+      - PrivateInvestor.java — old observer listener (prints watch)
+      - PublicInvestor.java — old observer listener (prints watch)
+      - core/
+          - Store.java — singleton market list
+          - Maker.java — factory for items
+          - Hub.java — mediator (trade rules, tick, fees, search)
+          - Gate.java — facade used by Main
+      - model/
+          - User.java — account data: cash, portfolio, history, watchlist, plan
+          - Holding.java — single holding (lot) with day-fee flags
+          - Group.java — composite portfolio (collection of holdings)
+          - Node.java — composite node interface
+          - Tx.java — transaction record
+      - trade/
+          - Act.java — command interface
+          - BuyAct.java — buy command
+          - SellAct.java — sell command
+          - Steps.java — template trade flow
+          - Cost.java — cost decorator interface
+          - BaseCost.java — no fee
+          - FeeWrap.java — adds fee
+          - PenaltyWrap.java — 5% day fee
+          - Plan.java — plan strategy interface
+          - PlanDay.java — day plan
+          - PlanLong.java — long plan
+          - PlanAuto.java — auto thresholds
+      - notify/
+          - IPriceListener.java — extended observer (old+new price)
+          - WatchCenter.java — watcher registry + notify
+          - Watch.java — watcher printing “watch TICK up/down”
+
+  How It Functions
+
+  - Market + items: Store holds all items (Stock subclasses like AmazonStock and
+    BasicItem). Maker builds items for the market.
+  - Accounts: Hub.register/login manage User objects. Each User has cash,
+    portfolio (Group of Holding), history, watchlist, and a Plan.
+  - Trading flow: Main calls Gate.buy/sell, which forwards to Hub. Hub delegates
+    to BuyAct/SellAct (command), each running Steps (template method).
+  - Trade rules: Hub.canTrade enforces stock hours (Mon–Fri, 09–18) and always-
+    on crypto. When blocked, it prints closed.
+  - Plans: PlanDay, PlanLong, PlanAuto are strategies applied per user. PlanAuto
+    runs on Hub.tick to auto buy/sell by thresholds.
+  - Day-fee: Hub.tick checks day-plan holdings. If a day-plan stock holding
+    crosses into next day, PenaltyWrap applies 5% and prints fee.
+  - History: Steps.record writes Tx entries (buy/sell, ticker, name, qty, price,
+    time).
+  - Observers:
+      - Old-style: Stock notifies IInvestor subscribers (PrivateInvestor/
+        PublicInvestor) on setPrice.
+      - Extended: WatchCenter notifies IPriceListener (e.g., Watch) with old/new
+        prices on Hub.tick.
+  - Main demo: Main wires everything, runs a closed-hours trade (prints closed),
+    executes buys/sells, triggers watch prints, and triggers day-fee on next-day
+    tick.

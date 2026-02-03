@@ -1,0 +1,162 @@
+You are generating a SMALL beginner-friendly Java project, but NOT an interactive terminal app.
+Everything is simulated with hardcoded examples inside Main.java (like my previous try).
+
+IMPORTANT CONTEXT (use my existing code style + files)
+I already have these files (keep package + style):
+- package project1;
+- Stock.java (abstract, has name/currency/price and observer list)
+- StockSubscriber.java
+- IInvestor.java
+- AmazonStock.java extends Stock
+- PrivateInvestor.java / PublicInvestor.java implement IInvestor
+- Main.java creates objects and calls methods (no Scanner)
+
+Coding style to follow:
+- private fields like: private String _name;
+- short methods, simple ifs
+- very few prints, and prints must be few words (NOT sentences)
+  examples: "ok", "no", "buy ok", "sell no", "closed", "fee", "watch AMZ up"
+- NO enums
+- NO frameworks
+- Java standard library only
+- Keep code “human-like”, beginner level, little code
+
+GOAL
+Design and implement a stock + crypto trading simulator with:
+1) Market items list (stocks + crypto), each item has: name, ticker, price, quantity, and a boolean isCrypto
+2) User account management:
+   - register(user, pass)
+   - login(user, pass)
+   - each User has: username, password, cash(double), portfolio holdings, history, watchlist, chosen plan
+3) Trading:
+   - search by ticker or name
+   - buy(item, qty)
+   - sell(item, qty)
+   - STOCK trades ONLY Mon–Fri 09:00–18:00 (local time)
+   - CRYPTO trades ANY time
+   - When blocked print exactly: "closed"
+4) Trading plans (configurable / switchable):
+   a) Day trading (stocks only): if a stock is bought and NOT sold same day => charge 5% of its value
+   b) Long-term (stocks only): can hold >1 day; if sold same day => treated as day trade
+   c) Auto thresholds: auto buy when price < low, auto sell when price > high
+      - For stocks, auto obeys stock trading hours
+5) Transaction history: records buy/sell with (ticker, name, qty, price, time)
+6) Notifications: when a watched item changes price
+
+ABSOLUTE RULES
+1) Do NOT build a menu / Scanner UI.
+2) Main.java must demonstrate everything by calling methods:
+   - create market
+   - create users (register/login)
+   - pick plans
+   - buy/sell examples
+   - show blocked stock trade outside hours (prints "closed")
+   - show day trade penalty after day passes (prints "fee")
+   - show watch notifications on price change (prints "watch TICK up/down")
+3) Do NOT name classes/interfaces with design pattern names:
+   Do NOT use words: Singleton, Factory, Composite, Decorator, Command, Facade, Template, Mediator, Observer, Strategy
+   Use neutral names like Store, Maker, Wrap, Act, Hub, Plan, Gate, Watch, Steps, Node, etc.
+4) At the TOP of EACH file add exactly one comment line:
+   // PATTERN: <pattern-name>
+   (pattern-name is one of: singleton, factory method, composite, decorator, command, facade, template method, strategy, mediator, observer)
+5) No extra complicated models. Keep minimal.
+
+DESIGN PATTERNS REQUIRED (use all, but NOT in names)
+You MUST implement these patterns and document motivation in PATTERNS.md (short bullets).
+- singleton
+- factory method
+- composite
+- decorator
+- command
+- facade
+- template method
+- strategy
+- mediator
+- observer
+
+SUGGESTED MAPPING (do this, keep code small)
+- singleton: Store (market items + prices/qty) as single instance
+- factory method: Maker creates Stock/Crypto items (or subtypes) from inputs
+- composite: portfolio nodes (single holding + group) share same totalValue() call
+- decorator: Wrap cost calculator or trade cost to add fee/penalty (5% rule)
+- command: BuyAct / SellAct with execute()
+- facade: One surface class used by Main.java for register/login/search/buy/sell/watch/tick/plan
+- template method: Steps base class executes trade skeleton (checks, apply cost, record, notify)
+- strategy: Plan interface for day/long/auto behaviors
+- mediator: Hub coordinates Store, trade execution, auto rules, and notifications
+- observer: watchlist notifications (2 versions):
+  1) old style: update(Stock item)
+  2) extended: update(Stock item, double oldPrice, double newPrice)
+  Keep both. Use separate interfaces, not enums.
+
+TRADING HOURS RULE (EMPHASIZE IN CODE)
+Create ONE clear method:
+  boolean canTrade(Stock item, LocalDateTime now)
+Rules:
+- if item isCrypto => true always
+- else:
+  - only Monday..Friday
+  - only between 09:00 (inclusive) and 18:00 (exclusive or inclusive, pick one and be consistent)
+If cannot trade: print "closed" and return.
+
+TIME SIMULATION
+Because Main.java is hardcoded:
+- trade methods should accept LocalDateTime now as parameter
+  buy(user, ticker, qty, now)
+  sell(user, ticker, qty, now)
+- tick(now) updates prices, triggers watch notifications, and runs auto rules
+
+DAY-TRADE PENALTY RULE (simple)
+If user bought a STOCK under day plan and still holds it after that day ends:
+- charge 5% of its current value (qty * currentPrice)
+- subtract from user cash
+- print "fee"
+Charge only ONCE per affected buy lot (mark as charged).
+Simplest: store buyDate + charged flag for day-plan buys.
+
+PROJECT STRUCTURE (simple, you can tweak names but keep package project1)
+project1/
+  Main.java
+  core/
+    Hub.java
+    Store.java
+    Maker.java
+    Gate.java
+  model/
+    User.java
+    Holding.java
+    Tx.java
+    Node.java
+    Group.java
+  trade/
+    Steps.java
+    BuyAct.java
+    SellAct.java
+    Cost.java
+    BaseCost.java
+    FeeWrap.java
+    PenaltyWrap.java
+    PlanDay.java
+    PlanLong.java
+    PlanAuto.java
+  notify/
+    WatchCenter.java
+    Watch.java
+    IPriceListener.java   (update(item, old, new))
+
+INTEGRATION WITH MY EXISTING FILES
+- Keep StockSubscriber and IInvestor, and keep the observer style like my code.
+- Extend Stock to include ticker, qty, and isCrypto(boolean), but keep my naming style.
+- AmazonStock should still work (or become an example stock item).
+- PrivateInvestor/PublicInvestor can remain as sample observers, but update prints to few words.
+- Main.java should look like my previous try: create objects, subscribe, setPrice, etc.
+  But now also show trading simulation calls.
+
+OUTPUT INSTRUCTIONS
+- Generate ALL code files with full contents.
+- Each file in a separate markdown code block.
+- Include PATTERNS.md with short bullets: pattern -> where used -> why.
+- Keep code short and readable.
+- Prints must be short (few words).
+
+START GENERATING THE FILES NOW.
