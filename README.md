@@ -10,9 +10,4 @@ Prompt: [project2-trading-platform-app-prompt.txt](project2-trading-platform-app
 - `project2-trading-platform-app-structure.txt` — high-level structure summary
 
 **Run**
-From the repo root:
-
-```bash
-javac -d project1/bin $(find project1/src -name "*.java")
-java --module-path project1/bin -m project1/project1.Main
-```
+Run `Main.java` from the `project1/` folder.
