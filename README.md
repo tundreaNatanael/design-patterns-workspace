@@ -10,4 +10,5 @@ Prompt: [project2-trading-platform-app-prompt.txt](project2-trading-platform-app
 - `project2-trading-platform-app-structure.txt` — high-level structure summary
 
 **Run Instructions**
+
 Run `Main.java` from the `project1/` folder.
